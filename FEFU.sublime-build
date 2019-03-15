@@ -1,0 +1,34 @@
+{
+    "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$",
+    "working_dir": "${project_path}",
+    "selector": "source.cpp",
+    "encoding": "1251",
+    "variants":
+    [
+        {
+            "env":
+            {
+                "LOGIN": "<YOUR_USERNAME>",
+                "UPATH": "/home/<YOUR_USERNAME>/playground"
+            },
+            "name": "Upload to ClusterSSH [Single]",
+            "cmd": ["scp", "${file_path}/${file_name}", "%LOGIN%@cluster.dvfu.ru:%UPATH%"],
+            "shell": true
+        },
+        {
+            "env":
+            {
+                "LOGIN": "<YOUR_USERNAME>",
+                "UPATH": "/home/<YOUR_USERNAME>/playground"
+            },
+            "name": "Upload to ClusterSSH [RSYNC]",
+            "shell_cmd": "rsync -avzh --filter=':- .gitignore' --delete --exclude='.git' . %LOGIN%@cluster.dvfu.ru:%UPATH%",
+            "shell": true
+        },
+        {
+            "name": "Manual Run (CMD)",
+            "shell_cmd": "echo Manual running... && start",
+            "shell": true
+        }
+    ]
+}
