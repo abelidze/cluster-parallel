@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
       "24 / res",
       "res * res",
       "res - 6",
+      "res / 10",
       nullptr
     };
 
