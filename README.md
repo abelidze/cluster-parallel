@@ -1,3 +1,3 @@
-# Parallel programming course labs
+# Parallel programming course labs [2019]
 
-Before using provided Sublime Text build system, change <YOUR_USERNAME> with your cluster.dvfu.ru login.
+Before using provided Sublime Text Build System update <USERNAME> with your cluster.dvfu.ru login.
