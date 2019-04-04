@@ -8,8 +8,8 @@
         {
             "env":
             {
-                "LOGIN": "<YOUR_USERNAME>",
-                "UPATH": "/home/<YOUR_USERNAME>/playground"
+                "LOGIN": "<USERNAME>",
+                "UPATH": "/home/<USERNAME>/playground"
             },
             "name": "Upload to ClusterSSH [Single]",
             "cmd": ["scp", "${file_path}/${file_name}", "%LOGIN%@cluster.dvfu.ru:%UPATH%"],
@@ -18,8 +18,8 @@
         {
             "env":
             {
-                "LOGIN": "<YOUR_USERNAME>",
-                "UPATH": "/home/<YOUR_USERNAME>/playground"
+                "LOGIN": "<USERNAME>",
+                "UPATH": "/home/<USERNAME>/playground"
             },
             "name": "Upload to ClusterSSH [RSYNC]",
             "shell_cmd": "rsync -avzh --filter=':- .gitignore' --delete --exclude='.git' . %LOGIN%@cluster.dvfu.ru:%UPATH%",
