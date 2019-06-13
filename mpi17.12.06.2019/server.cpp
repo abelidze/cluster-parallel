@@ -1,26 +1,35 @@
 #include <iostream>
+#include <string>
 #include <mpi.h>
 
-#define SLAVE_COUNT 5
+#define BUFFER_SIZE 1024
 
 int main(int argc, char* argv[])
 {
-  int size, payload;
   char port[MPI_MAX_PORT_NAME];
-  MPI_Status status;
-  MPI_Comm intercomm;
+  char buffer[BUFFER_SIZE];
 
   MPI_Init(&argc, &argv);
   MPI_Open_port(MPI_INFO_NULL, port);
-  std::cout << "Port: " << port << std::endl;
+  {
+    std::cout << "PortName: " << port << std::endl << "Waiting for incomming connection..." << std::endl;
 
-  MPI_Comm_accept(port, MPI_INFO_NULL, 0, MPI_COMM_SELF, &intercomm);
-  MPI_Recv(&payload, 1, MPI_INT, 0, 0, intercomm, &status);
-  MPI_Comm_free(&intercomm);
+    MPI_Comm intercomm;
+    MPI_Comm_accept(port, MPI_INFO_NULL, 0, MPI_COMM_SELF, &intercomm);
+    std::cout << "Client connected." << std::endl;
+
+    std::cout << "Enter message to send: ";
+    std::string message;
+    std::cin >> message;
+    MPI_Send(message.c_str(), message.size() + 1, MPI_CHAR, 0, 0, intercomm);
+
+    MPI_Status status;
+    MPI_Recv(buffer, BUFFER_SIZE, MPI_CHAR, 0, 0, intercomm, &status);
+    std::cout << "Received from client: " << buffer << std::endl;
+
+    MPI_Comm_free(&intercomm);
+  }
   MPI_Close_port(port);
-
-  std::cout << "Client sent: " << payload << std::endl;
-
   MPI_Finalize();
   return 0;
 }

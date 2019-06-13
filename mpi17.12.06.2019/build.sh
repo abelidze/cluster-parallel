@@ -1,4 +1,4 @@
 #!/bin/bash
 
-mpic++ master.cpp -o master -lpthread
-mpic++ slave.cpp -o slave -lpthread
+mpic++ server.cpp -o server -lpthread
+mpic++ client.cpp -o client -lpthread
