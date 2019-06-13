@@ -1,0 +1,3 @@
+[submodule "mpi_battleships"]
+	path = mpi_battleships
+	url = https://github.com/abelidze/mpi_battleships.git
